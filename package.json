@@ -12,6 +12,7 @@
     "@types/react-datepicker": "^4.11.2",
     "@types/react-dom": "^18.2.1",
     "@types/react-router-dom": "^5.3.3",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-confirm-alert": "^3.0.6",
     "react-datepicker": "^4.11.0",
@@ -21,7 +22,8 @@
     "sass": "^1.62.1",
     "styled-components": "^5.3.10",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "xml-js": "^1.6.11"
   },
   "scripts": {
     "start": "react-scripts start",
