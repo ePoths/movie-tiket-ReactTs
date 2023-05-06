@@ -1,0 +1,24 @@
+.movieTitle {
+  text-align: center;
+  margin-top: 15px;
+}
+.MovieContainer {
+}
+
+.MovieList {
+  display: inline-block;
+  height: 300px;
+  width: 100px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.DividingLin {
+  opacity: 10;
+  border-radius: 15px;
+  height: 3px;
+  background-color: white;
+  border: none;
+  margin-right: 10px;
+  margin-left: 10px;
+}
