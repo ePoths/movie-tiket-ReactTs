@@ -44,7 +44,6 @@ function Time() {
   const DatePicker = (date: Date) => {
     setDates(date);
     setVars(Dates?.toJSON());
-    console.log(date.getDay());
   };
   const ClickEvent = () => {
     Alrets();
