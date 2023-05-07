@@ -87,7 +87,6 @@ function movie() {
     const json = await (
       await fetch(
         `https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${apiKey}&itemPerPage=50&openStartDt=${nowDate.getFullYear()}&movieNm=
-
         `
       )
     ).json();
