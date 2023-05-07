@@ -3,14 +3,16 @@
   margin-top: 15px;
 }
 .MovieContainer {
+  display: inline-flex;
+  align-items: center;
 }
 
 .MovieList {
-  display: inline-block;
   height: 300px;
   width: 100px;
   background-color: white;
   border-radius: 15px;
+  text-align: center;
 }
 
 .DividingLin {
@@ -21,4 +23,11 @@
   border: none;
   margin-right: 10px;
   margin-left: 10px;
+}
+.MovieName {
+  font-weight: bold;
+  font-size: 20px;
+}
+.container {
+  display: flex;
 }

@@ -1,7 +1,8 @@
+/* eslint-disable no-restricted-globals */
 import * as React from "react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 // https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=3d66a398e26415511e946e3cde1bb5a5&itemPerPage=50
 
 interface infoMovieObjType {
@@ -19,8 +20,13 @@ interface infoMovieObjType {
   repGenreNm: string;
 
   directors: [{ peopleNm: string }];
-  companys: { companyCd: string; companyNm: string };
+  companys: [{ companyCd: string; companyNm: string }];
 }
+
+const Container = styled.div`
+  width: 100vh;
+  margin: 0 auto;
+`;
 const MovieMainTitle = styled.h1`
   font-size: 40px;
   text-align: center;
@@ -39,44 +45,53 @@ const DividingLine = styled.hr`
 const MovieConDividngLine = styled(DividingLine)`
   background-color: black;
 `;
+
 const MovieContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-flex;
+  &:hover {
+    transform: translateY(-20px) translateX(-10px);
+  }
 `;
 
 const MovieList = styled.div`
-  display: inline-block;
-  height: 300px;
+  height: 340px;
   width: 300px;
-  background-color: white;
-  border-radius: 15px;
   color: black;
-  margin-top: 10px;
+  margin: 50px 30px auto 30px;
+  border-radius: 15px;
+  background-color: white;
 `;
 
-const MovieName = styled.span`
+const MovieEnName = styled.span`
   display: block;
   font-weight: bold;
   font-size: 20px;
   margin-top: 10px;
   text-align: center;
+  margin: 10px auto;
+`;
+
+const MovieDes = styled.p`
+  margin-left: 10px;
 `;
 
 function movie() {
+  const nowDate = new Date();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [movie, setMovie] = useState([]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [movieDirectiors, setMovieDirectiors] = useState();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [loading, setLoading] = useState(true);
   const apiKey = "3d66a398e26415511e946e3cde1bb5a5";
+
   const getMovies = async () => {
     const json = await (
       await fetch(
-        `https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${apiKey}&itemPerPage=100&movieNm=스즈메의 문단속`
+        `https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${apiKey}&itemPerPage=50&openStartDt=${nowDate.getFullYear()}&movieNm=
+
+        `
       )
     ).json();
+    console.log(json);
     setMovie(json.movieListResult.movieList);
     setLoading(false);
   };
@@ -93,19 +108,34 @@ function movie() {
       {loading ? (
         <div>Loading....</div>
       ) : (
-        <div>
-          {movie.map((movie: infoMovieObjType) => (
-            <MovieContainer>
-              <MovieList>
-                <MovieName>{movie.movieNm}</MovieName>
-                <MovieConDividngLine />
-                <div>장르 : {movie.genreAlt}</div>
-                <div>영화 유형 : {movie.typeNm}</div>
-                <div>감독 : {movie.directors[0].peopleNm}</div>
-              </MovieList>
-            </MovieContainer>
-          ))}
-        </div>
+        <>
+          <Container>
+            {movie.map((movie: infoMovieObjType) => (
+              <MovieContainer>
+                <MovieList>
+                  <MovieEnName>{movie.movieNm}</MovieEnName>
+                  <MovieConDividngLine />
+                  <MovieDes>영어 제목 : {movie.movieNmEn}</MovieDes>
+                  <MovieDes>장르 : {movie.genreAlt}</MovieDes>
+                  <MovieDes>영화 유형 : {movie.typeNm}</MovieDes>
+                  <MovieDes>제작 국가 : {movie.nationAlt}</MovieDes>
+                  <MovieDes>
+                    감독 :{" "}
+                    {movie?.directors[0]?.peopleNm
+                      ? movie.directors[0]?.peopleNm
+                      : "undefind"}
+                  </MovieDes>
+                  <MovieDes>
+                    제작사 : {""}
+                    {movie.companys[0]?.companyNm
+                      ? `${movie.companys[0]?.companyNm}  (등)`
+                      : "undefind"}
+                  </MovieDes>
+                </MovieList>
+              </MovieContainer>
+            ))}
+          </Container>
+        </>
       )}
     </div>
   );
