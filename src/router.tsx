@@ -1,15 +1,25 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "./App";
-import Movie from "./movie";
+import App from "./pages/App";
+import Movie from "./pages/movie";
+import MovieInfo from "./pages/movieInfo";
+import Time from "./pages/time";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <App />,
+  },
+  {
+    path: "/movie",
     element: <Movie />,
   },
   {
     path: "/time",
-    element: <App />,
+    element: <Time />,
+  },
+  {
+    path: "/movie/:movieCd",
+    element: <MovieInfo />,
   },
 ]);
 

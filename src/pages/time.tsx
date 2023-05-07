@@ -3,13 +3,13 @@ import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
-import style from "./style/Picker.module.css";
-import calendar from "./img/icon.png";
+import style from "../style/Picker.module.css";
+import calendar from "../img/icon.png";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import "./style/CoustionUi.css";
+import "../style/CoustionUi.css";
 // https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=3d66a398e26415511e946e3cde1bb5a5&itemPerPage=50
-function App() {
+function Time() {
   const [getMonth, setGetMonth] = useState<number>(1);
   const [getDate, setGetDate] = useState<number>();
   const [getHour, setGethour] = useState<number>();
@@ -76,4 +76,4 @@ function App() {
   );
 }
 
-export default App;
+export default Time;
