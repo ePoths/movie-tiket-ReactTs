@@ -79,9 +79,9 @@ const MovieDes = styled.p`
 
 function movie() {
   const nowDate = new Date();
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [movie, setMovie] = useState([]);
-
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [loading, setLoading] = useState(true);
   const apiKey = "3d66a398e26415511e946e3cde1bb5a5";
@@ -93,11 +93,9 @@ function movie() {
         `
       )
     ).json();
-    console.log(json);
     setMovie(json.movieListResult.movieList);
     setLoading(false);
   };
-
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     getMovies();
