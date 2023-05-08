@@ -47,19 +47,21 @@ const MovieConDividngLine = styled(DividingLine)`
 `;
 
 const MovieContainer = styled.div`
+  margin: 50px 30px auto 30px;
   display: inline-flex;
   &:hover {
     transform: translateY(-20px) translateX(-10px);
   }
 `;
 
-const MovieList = styled.div`
+const MovieList = styled(Link)`
   height: 340px;
   width: 300px;
   color: black;
-  margin: 50px 30px auto 30px;
+  margin: 0 auto;
   border-radius: 15px;
   background-color: white;
+  text-decoration: none;
 `;
 
 const MovieEnName = styled.span`
@@ -79,6 +81,7 @@ function movie() {
   const nowDate = new Date();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [movie, setMovie] = useState([]);
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [loading, setLoading] = useState(true);
   const apiKey = "3d66a398e26415511e946e3cde1bb5a5";
@@ -86,7 +89,7 @@ function movie() {
   const getMovies = async () => {
     const json = await (
       await fetch(
-        `https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${apiKey}&itemPerPage=50&openStartDt=${nowDate.getFullYear()}&movieNm=
+        `https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${apiKey}&itemPerPage=50&openStartDt=${nowDate.getFullYear()}&movieNm
         `
       )
     ).json();
@@ -111,11 +114,14 @@ function movie() {
           <Container>
             {movie.map((movie: infoMovieObjType) => (
               <MovieContainer>
-                <MovieList>
-                  <MovieEnName>{movie.movieNm}</MovieEnName>
+                <MovieList to={`/movie/${movie.movieNm}`}>
+                  <MovieEnName>
+                    {movie?.movieNm ? movie?.movieNm : "undefined"}
+                  </MovieEnName>
                   <MovieConDividngLine />
                   <MovieDes>영어 제목 : {movie.movieNmEn}</MovieDes>
                   <MovieDes>장르 : {movie.genreAlt}</MovieDes>
+                  <MovieDes>개봉 일 : {movie.openDt}</MovieDes>
                   <MovieDes>영화 유형 : {movie.typeNm}</MovieDes>
                   <MovieDes>제작 국가 : {movie.nationAlt}</MovieDes>
                   <MovieDes>
@@ -127,7 +133,7 @@ function movie() {
                   <MovieDes>
                     제작사 : {""}
                     {movie.companys[0]?.companyNm
-                      ? `${movie.companys[0]?.companyNm}  (등)`
+                      ? `${movie.companys[0]?.companyNm}`
                       : "undefind"}
                   </MovieDes>
                 </MovieList>
