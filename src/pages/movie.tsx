@@ -18,7 +18,6 @@ interface infoMovieObjType {
   genreAlt: string;
   repNationNm: string;
   repGenreNm: string;
-
   directors: [{ peopleNm: string }];
   companys: [{ companyCd: string; companyNm: string }];
 }
@@ -29,8 +28,8 @@ const Container = styled.div`
 `;
 const MovieMainTitle = styled.h1`
   font-size: 40px;
+  margin-top: 40px;
   text-align: center;
-  margin-top: 15px;
 `;
 
 const DividingLine = styled.hr`
@@ -77,11 +76,34 @@ const MovieDes = styled.p`
   margin-left: 10px;
 `;
 
-function movie() {
-  const nowDate = new Date();
+const MovieSearch = styled.input`
+  margin-bottom: 30px;
+  height: 35px;
+  border-radius: 15px;
+  border: none;
+  border: 1px solid #252527;
+  text-align: center;
+  &:focus {
+    outline: none;
+  }
+`;
 
+const MovieSearchContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const SubMsg = styled.p`
+  text-align: center;
+  margin-bottom: 0;
+  font-size: 18px;
+`;
+
+function movie() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [movie, setMovie] = useState([]);
+  const [search, setSearch] = useState("");
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [movies, setMovie] = useState([]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [loading, setLoading] = useState(true);
   const apiKey = "3d66a398e26415511e946e3cde1bb5a5";
@@ -89,7 +111,7 @@ function movie() {
   const getMovies = async () => {
     const json = await (
       await fetch(
-        `https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${apiKey}&itemPerPage=50&openStartDt=${nowDate.getFullYear()}&movieNm
+        `https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=${apiKey}&itemPerPage=100&movieNm=${search}
         `
       )
     ).json();
@@ -99,18 +121,37 @@ function movie() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     getMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const movieSearchOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    getMovies();
+  };
 
   return (
     <div>
-      <MovieMainTitle>영화 선택</MovieMainTitle>
+      <div>
+        <MovieMainTitle>영화 리스트</MovieMainTitle>
+        <MovieSearchContainer>
+          <form onSubmit={movieSearchOnSubmit}>
+            <MovieSearch
+              value={search}
+              placeholder="영화 검색"
+              type="text"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </form>
+        </MovieSearchContainer>
+      </div>
       <DividingLine />
       {loading ? (
         <div>Loading....</div>
       ) : (
         <>
           <Container>
-            {movie.map((movie: infoMovieObjType) => (
+            <SubMsg>영화를 선택해 주세요.</SubMsg>
+            {movies.map((movie: infoMovieObjType) => (
               <MovieContainer>
                 <MovieList to={`/movie/${movie.movieNm}`}>
                   <MovieEnName>
