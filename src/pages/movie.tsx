@@ -116,6 +116,7 @@ function movie() {
       )
     ).json();
     setMovie(json.movieListResult.movieList);
+    console.log(json.movieListResult.movieListst);
     setLoading(false);
   };
   // eslint-disable-next-line react-hooks/rules-of-hooks
