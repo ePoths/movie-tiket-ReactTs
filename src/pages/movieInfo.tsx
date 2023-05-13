@@ -1,7 +1,73 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import styled, { keyframes } from "styled-components";
 
+const Container = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+`;
+const MainContainer = styled.div`
+  display: flex;
+  height: 305px;
+  width: 800px;
+  background-color: white;
+  color: black;
+  border-radius: 15px;
+  overflow: hidden;
+`;
+
+const IMG = styled.img`
+  width: 213px;
+  height: 305px;
+`;
+
+const Title = styled.h3`
+  margin: 15px;
+`;
+
+const TextContent = styled.div``;
+
+const TextArea = styled.div`
+  margin-left: 10px;
+`;
+const BtnColorAnime = keyframes`
+  from{
+    color : #000000
+  }to{
+    color : #abdaf5
+  }
+`;
+
+const Hr = styled.hr`
+  border-color: black;
+  border-radius: 20px;
+  border: 1px solid black;
+  transform: translateX(-15px);
+`;
+
+const Btn = styled(Link)`
+  display: flex;
+  width: 85.45px;
+  height: 305px;
+  border: none;
+  text-align: center;
+  margin-right: 6px;
+  background-color: white;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+  align-items: center;
+  &:hover {
+    animation: ${BtnColorAnime} 0.2s ease-in-out forwards;
+  }
+`;
+const Div = styled.div`
+  width: calc(800px - 213px - 88.45px - 2px);
+`;
 function movieInfo() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const params = useParams();
@@ -28,6 +94,7 @@ function movieInfo() {
   const [runtime, setRuntime] = useState("");
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [directorNm, setDirectorNm] = useState("");
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [directorEnNm, setDirectorEnNm] = useState("");
 
@@ -40,7 +107,7 @@ function movieInfo() {
   const getMovieInfo = async () => {
     const json = await (
       await fetch(
-        ` https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=${apiKey}&query=${params.movieNm}
+        `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&ServiceKey=${apiKey}&query=${params.movieNm}
           `
       )
     ).json();
@@ -61,31 +128,37 @@ function movieInfo() {
   };
 
   return (
-    <div>
-      <div>
-        <img src={`${moviePoseter}`} alt="이미지가 없습니다." />
-        <h3>
-          {movieName ? movieName : null}
-          {titleOrg ? `(${titleOrg})` : null}
-        </h3>
-        <span>
-          장르 : {type ? type : "undefined"} {genre ? `, ${genre}` : null}
-        </span>
-        <br />
-        <span>사용 용도 : {use ? use : "undefined"}</span>
-        <br />
-        <span>제작 국가 : {nation ? nation : "undefined"}</span>
-        <br />
-        <span>상영 등급 : {rating ? rating : "undefined"}</span>
-        <br />
-        <span>상영 시간 : {runtime ? `${runtime}분` : "undefined"}</span>
-        <br />
-        <span>
-          감독 : {directorNm ? directorNm : "undefined"}{" "}
-          {directorEnNm ? `(${directorEnNm})` : null}
-        </span>
-      </div>
-    </div>
+    <Container>
+      <MainContainer>
+        <IMG
+          className="eximg"
+          src={`${moviePoseter}`}
+          alt="이미지가 없습니다."
+        />
+        <Div>
+          <Title>
+            {movieName ? movieName : null}
+            {titleOrg ? `(${titleOrg})` : null}
+          </Title>
+          <TextContent>
+            <TextArea>
+              <p>제작 국가 : {nation ? nation : "undefined"}</p>
+              <p>사용 : {use ? use : "undefined"}</p>
+              <p>상영 시간 : {runtime ? `${runtime}분` : "undefined"}</p>
+              <p>유형 : {type ? type : "undefined"} </p>
+              <p>장르 : {genre ? `${genre}` : "undefined"}</p>
+              <p>상영 등급 : {rating ? rating : "undefined"}</p>
+              <p>
+                감독 : {directorNm ? directorNm : "undefined"}
+                {directorEnNm ? `(${directorEnNm})` : null}
+              </p>
+            </TextArea>
+          </TextContent>
+        </Div>
+        <Hr></Hr>
+        <Btn to={`/time/${movieName}`}>시간 선택</Btn>
+      </MainContainer>
+    </Container>
   );
 }
 
