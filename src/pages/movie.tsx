@@ -99,12 +99,9 @@ const SubMsg = styled.p`
   font-size: 18px;
 `;
 
-function movie() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+function Movie() {
   const [search, setSearch] = useState("");
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [movies, setMovie] = useState([]);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [loading, setLoading] = useState(true);
   const apiKey = "3d66a398e26415511e946e3cde1bb5a5";
 
@@ -119,7 +116,6 @@ function movie() {
     console.log(json.movieListResult.movieListst);
     setLoading(false);
   };
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     getMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -186,4 +182,4 @@ function movie() {
   );
 }
 
-export default movie;
+export default Movie;

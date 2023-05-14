@@ -68,37 +68,22 @@ const Btn = styled(Link)`
 const Div = styled.div`
   width: calc(800px - 213px - 88.45px - 2px);
 `;
-function movieInfo() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+function MovieInfo() {
   const params = useParams();
   const apiKey = "LLVTF2N6QAMH91G45D24";
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [movieName, setMovieName] = useState<string>();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [moviePoseter, setmoviePoster] = useState([]);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [genre, setGenre] = useState("");
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [nation, setNation] = useState("");
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [rating, setRating] = useState("");
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [titleEng, setTitleEng] = useState("");
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [titleOrg, setTitleOrg] = useState("");
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [type, setType] = useState("");
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [use, setUse] = useState("");
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [runtime, setRuntime] = useState("");
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [directorNm, setDirectorNm] = useState("");
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [directorEnNm, setDirectorEnNm] = useState("");
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     setMovieName(params.movieNm);
     getMovieInfo();
@@ -162,4 +147,4 @@ function movieInfo() {
   );
 }
 
-export default movieInfo;
+export default MovieInfo;
