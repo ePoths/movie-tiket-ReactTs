@@ -9,9 +9,11 @@ const GoToPage = styled(Link)`
 function App() {
   return (
     <div>
-      <GoToPage to="/movie">영화 리스트트</GoToPage>
+      <GoToPage to="/movie">영화 리스트</GoToPage>
       <br />
       <GoToPage to="/time">시간</GoToPage>
+      <br />
+      <GoToPage to="/Seat">좌석</GoToPage>
     </div>
   );
 }

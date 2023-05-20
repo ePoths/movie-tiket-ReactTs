@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./pages/App";
-import Time from "./pages/time";
-import Movie from "./pages/movie";
-import MovieInfo from "./pages/movieInfo";
+import Time from "./pages/Time";
+import Movie from "./pages/Movie";
+import MovieInfo from "./pages/MovieInfo";
+import Seat from "./pages/Seat";
 
 const router = createBrowserRouter([
   {
@@ -18,12 +19,16 @@ const router = createBrowserRouter([
     element: <Time />,
   },
   {
-    path: "/time/:movieNm",
+    path: "/movietimeset/:movieNm",
     element: <Time />,
   },
   {
     path: "/movie/:movieNm",
     element: <MovieInfo />,
+  },
+  {
+    path: "/Seat",
+    element: <Seat />,
   },
 ]);
 

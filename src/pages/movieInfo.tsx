@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
+import noImg from "../img/noImg.png";
 
 const Container = styled.div`
   height: 100vh;
@@ -71,22 +72,24 @@ const Div = styled.div`
 function MovieInfo() {
   const params = useParams();
   const apiKey = "LLVTF2N6QAMH91G45D24";
+  const [ImgCheck, setImgCheck] = useState(true);
   const [movieName, setMovieName] = useState<string>();
   const [moviePoseter, setmoviePoster] = useState([]);
   const [genre, setGenre] = useState("");
   const [nation, setNation] = useState("");
   const [rating, setRating] = useState("");
-  const [titleEng, setTitleEng] = useState("");
   const [titleOrg, setTitleOrg] = useState("");
   const [type, setType] = useState("");
   const [use, setUse] = useState("");
   const [runtime, setRuntime] = useState("");
   const [directorNm, setDirectorNm] = useState("");
   const [directorEnNm, setDirectorEnNm] = useState("");
+  const [test, setTest] = useState("");
 
   useEffect(() => {
     setMovieName(params.movieNm);
     getMovieInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getMovieInfo = async () => {
@@ -96,11 +99,11 @@ function MovieInfo() {
           `
       )
     ).json();
+    setTest(json.Data[0].Result[0].posters.split("jpg"));
     setmoviePoster(json.Data[0].Result[0].posters.split("|")[0]);
     setGenre(json.Data[0].Result[0].genre);
     setNation(json.Data[0].Result[0].nation);
     setRating(json.Data[0].Result[0].rating);
-    setTitleEng(json.Data[0].Result[0].titleEng);
     setTitleOrg(json.Data[0].Result[0].titleOrg);
     setType(json.Data[0].Result[0].type);
     setUse(json.Data[0].Result[0].use);
@@ -108,8 +111,6 @@ function MovieInfo() {
     setRuntime(json.Data[0].Result[0].runtime);
     setDirectorNm(json.Data[0].Result[0].directors.director[0].directorNm);
     setDirectorEnNm(json.Data[0].Result[0].directors.director[0].directorEnNm);
-
-    console.log(json.Data[0].Result[0]);
   };
 
   return (
@@ -117,7 +118,7 @@ function MovieInfo() {
       <MainContainer>
         <IMG
           className="eximg"
-          src={`${moviePoseter}`}
+          src={moviePoseter ? `${moviePoseter}` : `${noImg}`}
           alt="이미지가 없습니다."
         />
         <Div>
@@ -141,7 +142,7 @@ function MovieInfo() {
           </TextContent>
         </Div>
         <Hr></Hr>
-        <Btn to={`/time/${movieName}`}>시간 선택</Btn>
+        <Btn to={`/movietimeset/${movieName}`}>시간 선택</Btn>
       </MainContainer>
     </Container>
   );

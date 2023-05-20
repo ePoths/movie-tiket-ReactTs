@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,13 +8,16 @@ import calendar from "../img/icon.png";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../style/CoustionUi.css";
+import { useParams } from "react-router-dom";
 // https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=3d66a398e26415511e946e3cde1bb5a5&itemPerPage=50
 function Time() {
+  const params = useParams();
   const [getMonth, setGetMonth] = useState<number>(1);
   const [getDate, setGetDate] = useState<number>();
   const [getHour, setGethour] = useState<number>();
   const [vars, setVars] = useState<string>();
   const [Dates, setDates] = useState<Date | undefined>();
+  const [movieAr, setMovieAr] = useState(true);
 
   setTimeout(() => {
     const dateEvent = new Date(`${vars}`);
@@ -24,13 +27,20 @@ function Time() {
     setGethour(dateEvent.getHours());
   }, 100);
 
+  useEffect(() => {
+    if (params.movieNm === "") {
+      setMovieAr(false);
+    } else {
+    }
+  }, []);
+
   const Alrets = () => {
     confirmAlert({
-      title: "시간 선택",
+      title: `영화 시간 선택`,
       message: `${getMonth}월 ${getDate}일 ${getHour}시`,
       buttons: [
         {
-          label: "좌석 선택 하기",
+          label: "시청 하기",
           onClick: () => alert("click Yes"),
         },
         {
@@ -51,8 +61,14 @@ function Time() {
   return (
     <div className={style.container}>
       <div className={style.mainContainer}>
-        <h1>시간 선택</h1>
-        <p className={style.alertText}>아래의 날짜와 시간을 선택 해주세요.</p>
+        <h1>영화 시간 선택</h1>
+
+        <p className={style.alertText}>
+          영화 "{params.movieNm}"
+          <p className={style.dkwpahrrnlcksgdk}>
+            시청할 날짜와 시간을 선택 해주세요.
+          </p>
+        </p>
         <div className={style.dateBox}>
           <img className="iconImg" src={calendar} alt="1" />
           <ReactDatePicker

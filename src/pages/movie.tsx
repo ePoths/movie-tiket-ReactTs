@@ -118,7 +118,6 @@ function Movie() {
   };
   useEffect(() => {
     getMovies();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const movieSearchOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -145,38 +144,36 @@ function Movie() {
       {loading ? (
         <div>Loading....</div>
       ) : (
-        <>
-          <Container>
-            <SubMsg>영화를 선택해 주세요.</SubMsg>
-            {movies.map((movie: infoMovieObjType) => (
-              <MovieContainer>
-                <MovieList to={`/movie/${movie.movieNm}`}>
-                  <MovieEnName>
-                    {movie?.movieNm ? movie?.movieNm : "undefined"}
-                  </MovieEnName>
-                  <MovieConDividngLine />
-                  <MovieDes>영어 제목 : {movie.movieNmEn}</MovieDes>
-                  <MovieDes>장르 : {movie.genreAlt}</MovieDes>
-                  <MovieDes>개봉 일 : {movie.openDt}</MovieDes>
-                  <MovieDes>영화 유형 : {movie.typeNm}</MovieDes>
-                  <MovieDes>제작 국가 : {movie.nationAlt}</MovieDes>
-                  <MovieDes>
-                    감독 :{" "}
-                    {movie?.directors[0]?.peopleNm
-                      ? movie.directors[0]?.peopleNm
-                      : "undefind"}
-                  </MovieDes>
-                  <MovieDes>
-                    제작사 : {""}
-                    {movie.companys[0]?.companyNm
-                      ? `${movie.companys[0]?.companyNm}`
-                      : "undefind"}
-                  </MovieDes>
-                </MovieList>
-              </MovieContainer>
-            ))}
-          </Container>
-        </>
+        <Container>
+          <SubMsg>영화를 선택해 주세요.</SubMsg>
+          {movies.map((movie: infoMovieObjType) => (
+            <MovieContainer>
+              <MovieList to={`/movie/${movie.movieNm}`}>
+                <MovieEnName>
+                  {movie?.movieNm ? movie?.movieNm : "undefined"}
+                </MovieEnName>
+                <MovieConDividngLine />
+                <MovieDes>영어 제목 : {movie.movieNmEn}</MovieDes>
+                <MovieDes>장르 : {movie.genreAlt}</MovieDes>
+                <MovieDes>개봉 일 : {movie.openDt}</MovieDes>
+                <MovieDes>영화 유형 : {movie.typeNm}</MovieDes>
+                <MovieDes>제작 국가 : {movie.nationAlt}</MovieDes>
+                <MovieDes>
+                  감독 :{" "}
+                  {movie?.directors[0]?.peopleNm
+                    ? movie.directors[0]?.peopleNm
+                    : "undefind"}
+                </MovieDes>
+                <MovieDes>
+                  제작사 : {""}
+                  {movie.companys[0]?.companyNm
+                    ? `${movie.companys[0]?.companyNm}`
+                    : "undefind"}
+                </MovieDes>
+              </MovieList>
+            </MovieContainer>
+          ))}
+        </Container>
       )}
     </div>
   );

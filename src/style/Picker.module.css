@@ -39,7 +39,7 @@
 }
 .alertText {
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 17px;
 }
 .textContainer > h1 {
   margin-bottom: 10px;
@@ -62,6 +62,11 @@
 .btnStyle:hover {
   box-shadow: transparent;
   animation: btnHooverAnime 0.3s forwards;
+}
+
+.dkwpahrrnlcksgdk {
+  font-size: 15px;
+  font-weight: bold;
 }
 
 @keyframes btnHooverAnime {
