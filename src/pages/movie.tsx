@@ -44,6 +44,8 @@ const MovieConDividngLine = styled(DividingLine)`
   background-color: black;
 `;
 
+const a = styled.div``;
+
 const MovieContainer = styled.div`
   margin: 50px 30px 0 30px;
   display: inline-flex;
