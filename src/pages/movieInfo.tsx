@@ -69,10 +69,9 @@ const Btn = styled(Link)`
 const Div = styled.div`
   width: calc(800px - 213px - 88.45px - 2px);
 `;
+
 function MovieInfo() {
   const params = useParams();
-  const apiKey = "LLVTF2N6QAMH91G45D24";
-  const [ImgCheck, setImgCheck] = useState(true);
   const [movieName, setMovieName] = useState<string>();
   const [moviePoseter, setmoviePoster] = useState([]);
   const [genre, setGenre] = useState("");
@@ -84,13 +83,31 @@ function MovieInfo() {
   const [runtime, setRuntime] = useState("");
   const [directorNm, setDirectorNm] = useState("");
   const [directorEnNm, setDirectorEnNm] = useState("");
-  const [test, setTest] = useState("");
+  const [docid, setDocid] = useState("");
+  const apiKey = process.env.REACT_APP_MovieInfoTsx_File_Apikey;
+
+  const MovieListObj = {
+    movieName: `${movieName}`,
+    moviePoseter: `${moviePoseter}`,
+    runtime: `${runtime}`,
+    genre: `${genre}`,
+  };
 
   useEffect(() => {
     setMovieName(params.movieNm);
     getMovieInfo();
+    localStorage.clear();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const Onclick = () => {
+    alert(docid);
+    if (docid === "") {
+      localStorage.setItem(`${params.movieNm}`, JSON.stringify(MovieListObj));
+    } else {
+      localStorage.setItem(`${docid}`, JSON.stringify(MovieListObj));
+    }
+  };
 
   const getMovieInfo = async () => {
     const json = await (
@@ -99,7 +116,7 @@ function MovieInfo() {
           `
       )
     ).json();
-    setTest(json.Data[0].Result[0].posters.split("jpg"));
+    setDocid(json.Data[0].Result[0].DOCID);
     setmoviePoster(json.Data[0].Result[0].posters.split("|")[0]);
     setGenre(json.Data[0].Result[0].genre);
     setNation(json.Data[0].Result[0].nation);
@@ -107,7 +124,6 @@ function MovieInfo() {
     setTitleOrg(json.Data[0].Result[0].titleOrg);
     setType(json.Data[0].Result[0].type);
     setUse(json.Data[0].Result[0].use);
-    setRuntime(json.Data[0].Result[0].runtime);
     setRuntime(json.Data[0].Result[0].runtime);
     setDirectorNm(json.Data[0].Result[0].directors.director[0].directorNm);
     setDirectorEnNm(json.Data[0].Result[0].directors.director[0].directorEnNm);
@@ -142,7 +158,9 @@ function MovieInfo() {
           </TextContent>
         </Div>
         <Hr></Hr>
-        <Btn to={`/movietimeset/${movieName}`}>시간 선택</Btn>
+        <Btn onClick={Onclick} to={`/movietimeset/${movieName}`}>
+          시간 선택
+        </Btn>
       </MainContainer>
     </Container>
   );

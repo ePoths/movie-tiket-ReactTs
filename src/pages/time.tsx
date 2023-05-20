@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,7 +9,7 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../style/CoustionUi.css";
 import { useParams } from "react-router-dom";
-// https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=3d66a398e26415511e946e3cde1bb5a5&itemPerPage=50
+
 function Time() {
   const params = useParams();
   const [getMonth, setGetMonth] = useState<number>(1);
@@ -17,7 +17,6 @@ function Time() {
   const [getHour, setGethour] = useState<number>();
   const [vars, setVars] = useState<string>();
   const [Dates, setDates] = useState<Date | undefined>();
-  const [movieAr, setMovieAr] = useState(true);
 
   setTimeout(() => {
     const dateEvent = new Date(`${vars}`);
@@ -27,17 +26,12 @@ function Time() {
     setGethour(dateEvent.getHours());
   }, 100);
 
-  useEffect(() => {
-    if (params.movieNm === "") {
-      setMovieAr(false);
-    } else {
-    }
-  }, []);
-
   const Alrets = () => {
     confirmAlert({
       title: `영화 시간 선택`,
-      message: `${getMonth}월 ${getDate}일 ${getHour}시`,
+      message: `날짜 : ${getMonth ? `${getMonth}월` : `Not selected`} ${
+        getDate ? `${getDate}일` : ""
+      } ${getHour ? `${getHour}시` : ""}`,
       buttons: [
         {
           label: "시청 하기",

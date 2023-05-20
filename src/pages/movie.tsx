@@ -3,7 +3,6 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-// https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=3d66a398e26415511e946e3cde1bb5a5&itemPerPage=50
 
 interface infoMovieObjType {
   id: number;
@@ -46,7 +45,7 @@ const MovieConDividngLine = styled(DividingLine)`
 `;
 
 const MovieContainer = styled.div`
-  margin: 50px 30px auto 30px;
+  margin: 50px 30px 0 30px;
   display: inline-flex;
   &:hover {
     transform: translateY(-20px) translateX(-10px);
@@ -54,10 +53,9 @@ const MovieContainer = styled.div`
 `;
 
 const MovieList = styled(Link)`
-  height: 340px;
+  height: 380px;
   width: 300px;
   color: black;
-  margin: 0 auto;
   border-radius: 15px;
   background-color: white;
   text-decoration: none;
@@ -98,12 +96,16 @@ const SubMsg = styled.p`
   margin-bottom: 0;
   font-size: 18px;
 `;
+const Test = styled.div`
+  width: 1080px;
+  margin: 0 auto;
+`;
 
 function Movie() {
   const [search, setSearch] = useState("");
   const [movies, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
-  const apiKey = "3d66a398e26415511e946e3cde1bb5a5";
+  const apiKey = process.env.REACT_APP_MovieTsx_File_Apikey;
 
   const getMovies = async () => {
     const json = await (
@@ -113,18 +115,16 @@ function Movie() {
       )
     ).json();
     setMovie(json.movieListResult.movieList);
-    console.log(json.movieListResult.movieListst);
     setLoading(false);
   };
   useEffect(() => {
     getMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const movieSearchOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     getMovies();
   };
-
   return (
     <div>
       <div>
@@ -144,35 +144,49 @@ function Movie() {
       {loading ? (
         <div>Loading....</div>
       ) : (
-        <Container>
-          <SubMsg>영화를 선택해 주세요.</SubMsg>
-          {movies.map((movie: infoMovieObjType) => (
-            <MovieContainer>
-              <MovieList to={`/movie/${movie.movieNm}`}>
-                <MovieEnName>
-                  {movie?.movieNm ? movie?.movieNm : "undefined"}
-                </MovieEnName>
-                <MovieConDividngLine />
-                <MovieDes>영어 제목 : {movie.movieNmEn}</MovieDes>
-                <MovieDes>장르 : {movie.genreAlt}</MovieDes>
-                <MovieDes>개봉 일 : {movie.openDt}</MovieDes>
-                <MovieDes>영화 유형 : {movie.typeNm}</MovieDes>
-                <MovieDes>제작 국가 : {movie.nationAlt}</MovieDes>
-                <MovieDes>
-                  감독 :{" "}
-                  {movie?.directors[0]?.peopleNm
-                    ? movie.directors[0]?.peopleNm
-                    : "undefind"}
-                </MovieDes>
-                <MovieDes>
-                  제작사 : {""}
-                  {movie.companys[0]?.companyNm
-                    ? `${movie.companys[0]?.companyNm}`
-                    : "undefind"}
-                </MovieDes>
-              </MovieList>
-            </MovieContainer>
-          ))}
+        <Container className="12">
+          <Test>
+            <SubMsg>영화를 선택해 주세요.</SubMsg>
+            {movies.map((movie: infoMovieObjType) => (
+              <MovieContainer>
+                <MovieList to={`/movie/${movie.movieNm}`}>
+                  <MovieEnName>
+                    {movie?.movieNm ? movie?.movieNm : "undefined"}
+                  </MovieEnName>
+                  <MovieConDividngLine />
+                  <MovieDes>
+                    영어 제목 :{" "}
+                    {movie.movieNmEn ? movie.movieNmEn : "undefined"}
+                  </MovieDes>
+                  <MovieDes>
+                    장르 : {movie.genreAlt ? movie.genreAlt : "undefined"}
+                  </MovieDes>
+                  <MovieDes>
+                    개봉 일 : {movie.openDt ? movie.openDt : "undefined"}
+                  </MovieDes>
+                  <MovieDes>
+                    영화 유형 : {movie.typeNm ? movie.typeNm : "undefined"}
+                  </MovieDes>
+                  <MovieDes>
+                    제작 국가 :{" "}
+                    {movie.nationAlt ? movie.nationAlt : "undefined"}
+                  </MovieDes>
+                  <MovieDes>
+                    감독 :{" "}
+                    {movie?.directors[0]?.peopleNm
+                      ? movie.directors[0]?.peopleNm
+                      : "undefind"}
+                  </MovieDes>
+                  <MovieDes>
+                    제작사 : {""}
+                    {movie.companys[0]?.companyNm
+                      ? `${movie.companys[0]?.companyNm}`
+                      : "undefind"}
+                  </MovieDes>
+                </MovieList>
+              </MovieContainer>
+            ))}
+          </Test>
         </Container>
       )}
     </div>
