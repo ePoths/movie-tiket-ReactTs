@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     element: <Time />,
   },
   {
-    path: "/movietimeset/:movieNm",
+    path: "/movieTimeset/:movieNm",
     element: <Time />,
   },
   {

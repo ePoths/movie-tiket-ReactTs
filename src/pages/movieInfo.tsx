@@ -71,7 +71,10 @@ const Div = styled.div`
 `;
 
 function MovieInfo() {
+  const apiKey = process.env.REACT_APP_MovieInfoTsx_File_Apikey;
+  const localKey = process.env.REACT_APP_LocalStorageKey;
   const params = useParams();
+  const [poseterCheck, setPoseterCheck] = useState(true);
   const [movieName, setMovieName] = useState<string>();
   const [moviePoseter, setmoviePoster] = useState([]);
   const [genre, setGenre] = useState("");
@@ -84,7 +87,6 @@ function MovieInfo() {
   const [directorNm, setDirectorNm] = useState("");
   const [directorEnNm, setDirectorEnNm] = useState("");
   const [docid, setDocid] = useState("");
-  const apiKey = process.env.REACT_APP_MovieInfoTsx_File_Apikey;
 
   const MovieListObj = {
     movieName: `${movieName}`,
@@ -101,11 +103,10 @@ function MovieInfo() {
   }, []);
 
   const Onclick = () => {
-    alert(docid);
     if (docid === "") {
-      localStorage.setItem(`${params.movieNm}`, JSON.stringify(MovieListObj));
+      localStorage.setItem(`${localKey}`, JSON.stringify(MovieListObj));
     } else {
-      localStorage.setItem(`${docid}`, JSON.stringify(MovieListObj));
+      localStorage.setItem(`${localKey}`, JSON.stringify(MovieListObj));
     }
   };
 
@@ -129,40 +130,49 @@ function MovieInfo() {
     setDirectorEnNm(json.Data[0].Result[0].directors.director[0].directorEnNm);
   };
 
+  setTimeout(() => {
+    if (moviePoseter[0] === undefined) {
+      setPoseterCheck(false);
+    } else {
+      setPoseterCheck(true);
+    }
+  }, 1);
+
   return (
-    <Container>
-      <MainContainer>
-        <IMG
-          className="eximg"
-          src={moviePoseter ? `${moviePoseter}` : `${noImg}`}
-          alt="이미지가 없습니다."
-        />
-        <Div>
-          <Title>
-            {movieName ? movieName : null}
-            {titleOrg ? `(${titleOrg})` : null}
-          </Title>
-          <TextContent>
-            <TextArea>
-              <p>제작 국가 : {nation ? nation : "undefined"}</p>
-              <p>사용 : {use ? use : "undefined"}</p>
-              <p>상영 시간 : {runtime ? `${runtime}분` : "undefined"}</p>
-              <p>유형 : {type ? type : "undefined"} </p>
-              <p>장르 : {genre ? `${genre}` : "undefined"}</p>
-              <p>상영 등급 : {rating ? rating : "undefined"}</p>
-              <p>
-                감독 : {directorNm ? directorNm : "undefined"}
-                {directorEnNm ? `(${directorEnNm})` : null}
-              </p>
-            </TextArea>
-          </TextContent>
-        </Div>
-        <Hr></Hr>
-        <Btn onClick={Onclick} to={`/movietimeset/${movieName}`}>
-          시간 선택
-        </Btn>
-      </MainContainer>
-    </Container>
+    <>
+      <Container>
+        <MainContainer>
+          <IMG
+            src={poseterCheck ? `${moviePoseter}` : `${noImg}`}
+            alt="이미지가 없습니다."
+          />
+          <Div>
+            <Title>
+              {movieName ? movieName : null}
+              {titleOrg ? `(${titleOrg})` : null}
+            </Title>
+            <TextContent>
+              <TextArea>
+                <p>제작 국가 : {nation ? nation : "undefined"}</p>
+                <p>사용 : {use ? use : "undefined"}</p>
+                <p>상영 시간 : {runtime ? `${runtime}분` : "undefined"}</p>
+                <p>유형 : {type ? type : "undefined"} </p>
+                <p>장르 : {genre ? `${genre}` : "undefined"}</p>
+                <p>상영 등급 : {rating ? rating : "undefined"}</p>
+                <p>
+                  감독 : {directorNm ? directorNm : "undefined"}
+                  {directorEnNm ? `(${directorEnNm})` : null}
+                </p>
+              </TextArea>
+            </TextContent>
+          </Div>
+          <Hr></Hr>
+          <Btn onClick={Onclick} to={`/movietimeset/${movieName}`}>
+            시간 선택
+          </Btn>
+        </MainContainer>
+      </Container>
+    </>
   );
 }
 

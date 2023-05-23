@@ -1,16 +1,43 @@
+import styled from "styled-components";
+import style from "../style/SeatStyle.module.css";
+
+const DivNumber = styled.div`
+  background-color: #f8cece;
+  border: 1px solid black;
+`;
+
 function Seat() {
   return (
     <div>
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-      <div>5</div>
-      <div>6</div>
-      <div>7</div>
-      <div>8</div>
-      <div>9</div>
-      <div>10</div>
+      <DivNumber>1</DivNumber>
+      <DivNumber>2</DivNumber>
+      <DivNumber>3</DivNumber>
+      <DivNumber>4</DivNumber>
+      <DivNumber>5</DivNumber>
+      <DivNumber>6</DivNumber>
+      <DivNumber>7</DivNumber>
+      <DivNumber>8</DivNumber>
+      <DivNumber>9</DivNumber>
+      <DivNumber>10</DivNumber>
+      <DivNumber>12</DivNumber>
+      <DivNumber>13</DivNumber>
+      <DivNumber>14</DivNumber>
+      <DivNumber>15</DivNumber>
+      <DivNumber>16</DivNumber>
+      <DivNumber>17</DivNumber>
+      <DivNumber>18</DivNumber>
+      <DivNumber>19</DivNumber>
+      <DivNumber>20</DivNumber>
+      <DivNumber>21</DivNumber>
+      <DivNumber>22</DivNumber>
+      <DivNumber>23</DivNumber>
+      <DivNumber>24</DivNumber>
+      <DivNumber>25</DivNumber>
+      <DivNumber>26</DivNumber>
+      <DivNumber>27</DivNumber>
+      <DivNumber>28</DivNumber>
+      <DivNumber>29</DivNumber>
+      <DivNumber>30</DivNumber>
     </div>
   );
 }

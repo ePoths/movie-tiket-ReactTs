@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
@@ -8,15 +8,22 @@ import calendar from "../img/icon.png";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../style/CoustionUi.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Time() {
   const params = useParams();
+  const Localkey = process.env.REACT_APP_LocalStorageKey;
+  const LocalStorageOgj = JSON.parse(`${localStorage.getItem(`${Localkey}`)}`);
   const [getMonth, setGetMonth] = useState<number>(1);
   const [getDate, setGetDate] = useState<number>();
   const [getHour, setGethour] = useState<number>();
   const [vars, setVars] = useState<string>();
   const [Dates, setDates] = useState<Date | undefined>();
+  const Goto = useNavigate();
+
+  useEffect(() => {
+    console.log(LocalStorageOgj.moviePoseter);
+  });
 
   setTimeout(() => {
     const dateEvent = new Date(`${vars}`);
@@ -35,7 +42,7 @@ function Time() {
       buttons: [
         {
           label: "시청 하기",
-          onClick: () => alert("click Yes"),
+          onClick: () => Goto("/Seat"),
         },
         {
           label: "시간 수정",
