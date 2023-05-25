@@ -1,3 +1,6 @@
 .react-confirm-alert-overlay {
   background-color: #343435;
 }
+.react-confirm-alert-body > h1 {
+  font-size: 25px;
+}

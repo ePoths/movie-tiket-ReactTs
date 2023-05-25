@@ -1,0 +1,47 @@
+.main {
+  width: 40vh;
+  margin: 0 auto;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 70px;
+  row-gap: 100px;
+  color: white;
+  text-decoration: none;
+}
+
+.screen {
+  width: 70vh;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+  margin-top: 20px;
+  border: 7px solid white;
+}
+
+.contentsBox1 {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.contentsBox2 {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.contentsBox3 {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.screen:hover {
+  box-shadow: 0px 6px 25px 0px rgba(255, 255, 255, 0.75);
+  -webkit-box-shadow: 0px 6px 25px 0px rgba(255, 255, 255, 0.75);
+  -moz-box-shadow: 0px 6px 25px 0px rgba(255, 255, 255, 0.75);
+  cursor: not-allowed;
+}
+test {
+  height: 20px;
+  text-align: center;
+}

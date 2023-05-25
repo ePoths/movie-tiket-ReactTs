@@ -27,7 +27,11 @@ const router = createBrowserRouter([
     element: <MovieInfo />,
   },
   {
-    path: "/Seat",
+    path: "/Seat/",
+    element: <Seat />,
+  },
+  {
+    path: "/Seat/:seatNumber",
     element: <Seat />,
   },
 ]);

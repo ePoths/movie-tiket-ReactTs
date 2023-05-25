@@ -19,6 +19,7 @@ function Time() {
   const [getHour, setGethour] = useState<number>();
   const [vars, setVars] = useState<string>();
   const [Dates, setDates] = useState<Date | undefined>();
+  const [localSet, setLocalSet] = useState<{}>();
   const Goto = useNavigate();
 
   useEffect(() => {
@@ -26,14 +27,33 @@ function Time() {
   });
 
   setTimeout(() => {
+    const movieSetDate = {
+      date: `${getDate}`,
+      hour: `${getHour}`,
+      month: `${getMonth}`,
+    };
     const dateEvent = new Date(`${vars}`);
     setVars(Dates?.toJSON());
     setGetDate(dateEvent.getDate());
     setGetMonth(dateEvent.getMonth() + 1);
     setGethour(dateEvent.getHours());
+    setLocalSet(movieSetDate);
   }, 100);
 
-  const Alrets = () => {
+  const DatePicker = (date: Date) => {
+    setDates(date);
+    setVars(Dates?.toJSON());
+  };
+  const ClickEvent = () => {
+    CoustomAlerts("좌석 선택하기", "취소");
+  };
+
+  const AlertsClick = () => {
+    window.localStorage.setItem("date", JSON.stringify(localSet));
+    Goto("/Seat");
+  };
+
+  const CoustomAlerts = (button1?: string, button2?: string) => {
     confirmAlert({
       title: `영화 시간 선택`,
       message: `날짜 : ${getMonth ? `${getMonth}월` : `Not selected`} ${
@@ -41,24 +61,17 @@ function Time() {
       } ${getHour ? `${getHour}시` : ""}`,
       buttons: [
         {
-          label: "시청 하기",
-          onClick: () => Goto("/Seat"),
+          label: `${button1}`,
+          onClick: () => AlertsClick(),
         },
         {
-          label: "시간 수정",
-          onClick: () => alert("click No"),
+          label: `${button2}`,
+          onClick: () => console.log(""),
         },
       ],
     });
   };
 
-  const DatePicker = (date: Date) => {
-    setDates(date);
-    setVars(Dates?.toJSON());
-  };
-  const ClickEvent = () => {
-    Alrets();
-  };
   return (
     <div className={style.container}>
       <div className={style.mainContainer}>
