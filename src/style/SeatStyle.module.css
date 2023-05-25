@@ -8,8 +8,6 @@
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 70px;
   row-gap: 100px;
-  color: white;
-  text-decoration: none;
 }
 
 .screen {
