@@ -1,31 +1,12 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import style from "../style/SeatStyle.module.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "../style/CoustionUi.css";
 
-const DivNumber = styled.div`
-  display: block;
-  background-color: #252527;
-  border: 1px solid #f15959;
-  height: 50px;
-  line-height: 50px;
-  margin-bottom: 20px;
-  text-align: center;
-  color: white;
-  text-decoration: none;
-  &:hover {
-    font-size: 17px;
-    box-shadow: 0px 6px 25px 0px rgba(230, 114, 114, 0.75);
-    -webkit-box-shadow: 0px 6px 25px 0px rgba(230, 114, 114, 0.75);
-    -moz-box-shadow: 0px 6px 25px 0px rgba(230, 114, 114, 0.75);
-    cursor: pointer;
-  }
-`;
-
-const SeatDivNumber = styled(Link)`
+const SeatDivNumber = styled.li`
   display: block;
   background-color: #252527;
   border: 1px solid #f15959;
@@ -53,29 +34,22 @@ const HR = styled.hr`
 `;
 
 function Seat() {
-  const parms = useParams();
-  const localKey = process.env.REACT_APP_LocalStorageKey;
-  const [SeatNumber, setSeatNumber] = useState<string>();
   const [getmonth, setGetMonth] = useState();
   const [getDate, setGetDate] = useState();
   const [getHour, setGetHour] = useState();
+  const inputRef = useRef(null);
   const Goto = useNavigate();
 
-  const LocalStorageMovieDataOgj = JSON.parse(
-    `${localStorage.getItem(`${localKey}`)}`
-  );
   const LocalStorageMovieDateDataOgj = JSON.parse(
     `${localStorage.getItem(`date`)}`
   );
 
   useEffect(() => {
-    setSeatNumber(parms.seatNumber);
     setGetMonth(LocalStorageMovieDateDataOgj.month);
     setGetDate(LocalStorageMovieDateDataOgj.date);
     setGetHour(LocalStorageMovieDateDataOgj.hour);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {}, []);
 
   /** moth, date, hour, titlemsg, button1, button2 커스텀 알림 */
   const CoustomAlerts = (
@@ -94,73 +68,139 @@ function Seat() {
       buttons: [
         {
           label: `${button1}`,
-          onClick: () => Goto("/Seat"),
+          onClick: () => Goto("/ticket"),
         },
         {
           label: `${button2}`,
-          onClick: () => alert("click No"),
+          onClick: () => {},
         },
       ],
     });
   };
 
-  const onClick = () => {
+  const onClick = (e: React.MouseEvent<HTMLElement>) => {
+    // e,target 오류 해결 <https://stackoverflow.com/questions/44321326/property-value-does-not-exist-on-type-eventtarget-in-typescript>
+    window.localStorage.setItem(
+      "seatN",
+      `${(e.target as HTMLInputElement).id}`
+    );
     CoustomAlerts(
-      `${SeatNumber}번 좌석을 선택 하시겠습니까?`,
+      `${(e.target as HTMLInputElement).id}번 좌석을 선택 하시겠습니까?`,
       `${getmonth}`,
       `${getDate}`,
-      `${getHour}`
+      `${getHour}`,
+      `예`,
+      `아니요`
     );
   };
 
   return (
-    <>
-      <button onClick={onClick}>test</button>
-      <Link to="/movie">무비</Link>
+    <div className={style.main}>
       <H1>좌석을 선택 하여 주세요.</H1>
       <HR />
       <div className={style.screen}>스크린</div>
-      <div className={style.main}>
+      <div className={style.mainContents}>
         <div className={style.container}>
           <div className={style.contentsBox1}>
-            <SeatDivNumber to={`/seat/1`}>1번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/2`}>2번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/3`}>3번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/4`}>4번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/5`}>5번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/6`}>6번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/7`}>7번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/8`}>8번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/9`}>9번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/10`}>10번</SeatDivNumber>
+            <SeatDivNumber id="1" onClick={onClick} ref={inputRef}>
+              1번
+            </SeatDivNumber>
+            <SeatDivNumber id="2" onClick={onClick}>
+              2번
+            </SeatDivNumber>
+            <SeatDivNumber id="3" onClick={onClick}>
+              3번
+            </SeatDivNumber>
+            <SeatDivNumber id="4" onClick={onClick}>
+              4번
+            </SeatDivNumber>
+            <SeatDivNumber id="5" onClick={onClick}>
+              5번
+            </SeatDivNumber>
+            <SeatDivNumber id="6" onClick={onClick}>
+              6번
+            </SeatDivNumber>
+            <SeatDivNumber id="7" onClick={onClick}>
+              7번
+            </SeatDivNumber>
+            <SeatDivNumber id="8" onClick={onClick}>
+              8번
+            </SeatDivNumber>
+            <SeatDivNumber id="9" onClick={onClick}>
+              9번
+            </SeatDivNumber>
+            <SeatDivNumber id="10" onClick={onClick}>
+              10번
+            </SeatDivNumber>
           </div>
           <div className={style.contentsBox2}>
-            <SeatDivNumber to={`/seat/11`}>11번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/12`}>12번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/13`}>13번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/14`}>14번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/15`}>15번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/15`}>16번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/16`}>17번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/18`}>18번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/19`}>19번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/20`}>20번</SeatDivNumber>
+            <SeatDivNumber id="11" onClick={onClick}>
+              11번
+            </SeatDivNumber>
+            <SeatDivNumber id="12" onClick={onClick}>
+              12번
+            </SeatDivNumber>
+            <SeatDivNumber id="13" onClick={onClick}>
+              13번
+            </SeatDivNumber>
+            <SeatDivNumber id="14" onClick={onClick}>
+              14번
+            </SeatDivNumber>
+            <SeatDivNumber id="15" onClick={onClick}>
+              15번
+            </SeatDivNumber>
+            <SeatDivNumber id="16" onClick={onClick}>
+              16번
+            </SeatDivNumber>
+            <SeatDivNumber id="17" onClick={onClick}>
+              17번
+            </SeatDivNumber>
+            <SeatDivNumber id="18" onClick={onClick}>
+              18번
+            </SeatDivNumber>
+            <SeatDivNumber id="19" onClick={onClick}>
+              19번
+            </SeatDivNumber>
+            <SeatDivNumber id="20" onClick={onClick}>
+              20번
+            </SeatDivNumber>
           </div>
           <div className={style.contentsBox3}>
-            <SeatDivNumber to={`/seat/21`}>21번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/22`}>22번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/23`}>23번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/24`}>24번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/25`}>25번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/26`}>26번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/27`}>27번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/28`}>28번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/29`}>29번</SeatDivNumber>
-            <SeatDivNumber to={`/seat/30`}>30번</SeatDivNumber>
+            <SeatDivNumber id="21" onClick={onClick}>
+              21번
+            </SeatDivNumber>
+            <SeatDivNumber id="22" onClick={onClick}>
+              22번
+            </SeatDivNumber>
+            <SeatDivNumber id="23" onClick={onClick}>
+              23번
+            </SeatDivNumber>
+            <SeatDivNumber id="24" onClick={onClick}>
+              24번
+            </SeatDivNumber>
+            <SeatDivNumber id="25" onClick={onClick}>
+              25번
+            </SeatDivNumber>
+            <SeatDivNumber id="26" onClick={onClick}>
+              26번
+            </SeatDivNumber>
+            <SeatDivNumber id="27" onClick={onClick}>
+              27번
+            </SeatDivNumber>
+            <SeatDivNumber id="28" onClick={onClick}>
+              28번
+            </SeatDivNumber>
+            <SeatDivNumber id="29" onClick={onClick}>
+              29번
+            </SeatDivNumber>
+            <SeatDivNumber id="30" onClick={onClick}>
+              30번
+            </SeatDivNumber>
           </div>
         </div>
       </div>
-    </>
+      <HR />
+    </div>
   );
 }
 export default Seat;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import "react-datepicker/dist/react-datepicker.css";
@@ -12,8 +12,6 @@ import { useNavigate, useParams } from "react-router-dom";
 
 function Time() {
   const params = useParams();
-  const Localkey = process.env.REACT_APP_LocalStorageKey;
-  const LocalStorageOgj = JSON.parse(`${localStorage.getItem(`${Localkey}`)}`);
   const [getMonth, setGetMonth] = useState<number>(1);
   const [getDate, setGetDate] = useState<number>();
   const [getHour, setGethour] = useState<number>();
@@ -21,10 +19,6 @@ function Time() {
   const [Dates, setDates] = useState<Date | undefined>();
   const [localSet, setLocalSet] = useState<{}>();
   const Goto = useNavigate();
-
-  useEffect(() => {
-    console.log(LocalStorageOgj.moviePoseter);
-  });
 
   setTimeout(() => {
     const movieSetDate = {

@@ -4,6 +4,7 @@ import Time from "./pages/Time";
 import Movie from "./pages/Movie";
 import MovieInfo from "./pages/MovieInfo";
 import Seat from "./pages/Seat";
+import Ticket from "./pages/Ticket";
 
 const router = createBrowserRouter([
   {
@@ -31,8 +32,8 @@ const router = createBrowserRouter([
     element: <Seat />,
   },
   {
-    path: "/Seat/:seatNumber",
-    element: <Seat />,
+    path: "/ticket",
+    element: <Ticket />,
   },
 ]);
 
