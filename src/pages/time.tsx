@@ -38,9 +38,6 @@ function Time() {
     setDates(date);
     setVars(Dates?.toJSON());
   };
-  const ClickEvent = () => {
-    CoustomAlerts("좌석 선택하기", "취소");
-  };
 
   const AlertsClick = () => {
     window.localStorage.setItem("date", JSON.stringify(localSet));
@@ -64,6 +61,14 @@ function Time() {
         },
       ],
     });
+  };
+
+  const ClickEvent = () => {
+    if (Number.isNaN(getMonth)) {
+      alert("날짜와 시간을 선택 해주세요.");
+    } else {
+      CoustomAlerts("좌석 선택하기", "취소");
+    }
   };
 
   return (

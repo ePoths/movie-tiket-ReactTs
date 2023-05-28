@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import noImg from "../img/noImg.png";
 
+const Mainh1 = styled.h1`
+  text-align: center;
+`;
+
 const Container = styled.div`
   height: 100vh;
 `;
@@ -77,6 +81,8 @@ function Ticket() {
 
   return (
     <Container>
+      <Mainh1>구매 완료</Mainh1>
+      <hr />
       <Contants>
         <ContantsBox>
           <OverView>
