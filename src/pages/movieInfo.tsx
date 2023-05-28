@@ -93,6 +93,7 @@ function MovieInfo() {
     moviePoseter: `${moviePoseter}`,
     runtime: `${runtime}`,
     genre: `${genre}`,
+    rating: `${rating}`,
   };
 
   useEffect(() => {

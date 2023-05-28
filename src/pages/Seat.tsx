@@ -62,7 +62,7 @@ function Seat() {
   ) => {
     confirmAlert({
       title: `${titleMsg}`,
-      message: `날짜 : ${month ? `${month}월` : `Not Finded`} ${
+      message: `예약 시간 : ${month ? `${month}월` : `Not Finded`} ${
         date ? `${date}일` : ""
       } ${hour ? `${hour}시` : ""}`,
       buttons: [
