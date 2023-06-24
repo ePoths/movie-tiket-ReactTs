@@ -1,0 +1,19 @@
+.top {
+  width: calc(100vh - 21);
+  text-align: center;
+}
+.title {
+  margin: 0 auto;
+}
+
+.backButton {
+  display: inline;
+  text-decoration: underline 1px white;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: white;
+  border: none;
+  font-size: 16px;
+  background-color: #252527;
+  cursor: pointer;
+}

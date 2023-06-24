@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import noImg from "../img/noImg.png";
-
+import style from "../style/MIStyle.module.css";
 const Container = styled.div`
-  height: 100vh;
+  height: calc(100vh - 63);
   display: flex;
   justify-content: center;
   margin-top: 200px;
@@ -139,8 +139,18 @@ function MovieInfo() {
     }
   }, 1);
 
+  const BackButton = () => {
+    window.history.back();
+  };
+
   return (
     <>
+      <button onClick={BackButton} className={style.backButton}>
+        뒤로 가기
+      </button>
+      <div className={style.top}>
+        <h1 className={style.title}>영화 정보</h1>
+      </div>
       <Container>
         <MainContainer>
           <IMG

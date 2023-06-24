@@ -96,9 +96,20 @@ const SubMsg = styled.p`
   margin-bottom: 0;
   font-size: 18px;
 `;
-const Test = styled.div`
+const MovieItme = styled.div`
   width: 1080px;
   margin: 0 auto;
+  transform: translateX(-5%);
+`;
+const BackButtonStyle = styled.button`
+  text-decoration: underline 1px white;
+  margin-top: 5px;
+  margin-left: 10px;
+  color: white;
+  border: none;
+  font-size: 16px;
+  background-color: #252527;
+  cursor: pointer;
 `;
 
 function Movie() {
@@ -125,8 +136,16 @@ function Movie() {
     event.preventDefault();
     getMovies();
   };
+
+  const BackButtonClickEvent = () => {
+    window.history.back();
+  };
+
   return (
     <div>
+      <BackButtonStyle onClick={BackButtonClickEvent}>
+        뒤로 가기
+      </BackButtonStyle>
       <div>
         <MovieMainTitle>영화 리스트</MovieMainTitle>
         <MovieSearchContainer>
@@ -144,8 +163,8 @@ function Movie() {
       {loading ? (
         <div>Loading....</div>
       ) : (
-        <Container className="12">
-          <Test>
+        <Container>
+          <MovieItme>
             <SubMsg>영화를 선택해 주세요.</SubMsg>
             {movies.map((movie: infoMovieObjType) => (
               <MovieContainer>
@@ -186,7 +205,7 @@ function Movie() {
                 </MovieList>
               </MovieContainer>
             ))}
-          </Test>
+          </MovieItme>
         </Container>
       )}
     </div>

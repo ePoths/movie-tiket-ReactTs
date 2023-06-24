@@ -33,6 +33,17 @@ const HR = styled.hr`
   border: 1px solid #5e5e5e;
 `;
 
+const BackButtonStyle = styled.button`
+  text-decoration: underline 1px white;
+  margin-top: 5px;
+  margin-left: 10px;
+  color: white;
+  border: none;
+  font-size: 16px;
+  background-color: #252527;
+  cursor: pointer;
+`;
+
 function Seat() {
   const [getmonth, setGetMonth] = useState();
   const [getDate, setGetDate] = useState();
@@ -94,113 +105,120 @@ function Seat() {
     );
   };
 
+  const BackButtonClickEvent = () => {
+    window.history.back();
+  };
+
   return (
-    <div className={style.main}>
+    <>
+      <BackButtonStyle onClick={BackButtonClickEvent}>뒤로가기</BackButtonStyle>
       <H1>좌석을 선택 하여 주세요.</H1>
-      <HR />
-      <div className={style.screen}>스크린</div>
-      <div className={style.mainContents}>
-        <div className={style.container}>
-          <div className={style.contentsBox1}>
-            <SeatDivNumber id="1" onClick={onClick} ref={inputRef}>
-              1번
-            </SeatDivNumber>
-            <SeatDivNumber id="2" onClick={onClick}>
-              2번
-            </SeatDivNumber>
-            <SeatDivNumber id="3" onClick={onClick}>
-              3번
-            </SeatDivNumber>
-            <SeatDivNumber id="4" onClick={onClick}>
-              4번
-            </SeatDivNumber>
-            <SeatDivNumber id="5" onClick={onClick}>
-              5번
-            </SeatDivNumber>
-            <SeatDivNumber id="6" onClick={onClick}>
-              6번
-            </SeatDivNumber>
-            <SeatDivNumber id="7" onClick={onClick}>
-              7번
-            </SeatDivNumber>
-            <SeatDivNumber id="8" onClick={onClick}>
-              8번
-            </SeatDivNumber>
-            <SeatDivNumber id="9" onClick={onClick}>
-              9번
-            </SeatDivNumber>
-            <SeatDivNumber id="10" onClick={onClick}>
-              10번
-            </SeatDivNumber>
-          </div>
-          <div className={style.contentsBox2}>
-            <SeatDivNumber id="11" onClick={onClick}>
-              11번
-            </SeatDivNumber>
-            <SeatDivNumber id="12" onClick={onClick}>
-              12번
-            </SeatDivNumber>
-            <SeatDivNumber id="13" onClick={onClick}>
-              13번
-            </SeatDivNumber>
-            <SeatDivNumber id="14" onClick={onClick}>
-              14번
-            </SeatDivNumber>
-            <SeatDivNumber id="15" onClick={onClick}>
-              15번
-            </SeatDivNumber>
-            <SeatDivNumber id="16" onClick={onClick}>
-              16번
-            </SeatDivNumber>
-            <SeatDivNumber id="17" onClick={onClick}>
-              17번
-            </SeatDivNumber>
-            <SeatDivNumber id="18" onClick={onClick}>
-              18번
-            </SeatDivNumber>
-            <SeatDivNumber id="19" onClick={onClick}>
-              19번
-            </SeatDivNumber>
-            <SeatDivNumber id="20" onClick={onClick}>
-              20번
-            </SeatDivNumber>
-          </div>
-          <div className={style.contentsBox3}>
-            <SeatDivNumber id="21" onClick={onClick}>
-              21번
-            </SeatDivNumber>
-            <SeatDivNumber id="22" onClick={onClick}>
-              22번
-            </SeatDivNumber>
-            <SeatDivNumber id="23" onClick={onClick}>
-              23번
-            </SeatDivNumber>
-            <SeatDivNumber id="24" onClick={onClick}>
-              24번
-            </SeatDivNumber>
-            <SeatDivNumber id="25" onClick={onClick}>
-              25번
-            </SeatDivNumber>
-            <SeatDivNumber id="26" onClick={onClick}>
-              26번
-            </SeatDivNumber>
-            <SeatDivNumber id="27" onClick={onClick}>
-              27번
-            </SeatDivNumber>
-            <SeatDivNumber id="28" onClick={onClick}>
-              28번
-            </SeatDivNumber>
-            <SeatDivNumber id="29" onClick={onClick}>
-              29번
-            </SeatDivNumber>
-            <SeatDivNumber id="30" onClick={onClick}>
-              30번
-            </SeatDivNumber>
+      <div className={style.main}>
+        <HR />
+        <div className={style.screen}>스크린</div>
+        <div className={style.mainContents}>
+          <div className={style.container}>
+            <div className={style.contentsBox1}>
+              <SeatDivNumber id="1" onClick={onClick} ref={inputRef}>
+                1번
+              </SeatDivNumber>
+              <SeatDivNumber id="2" onClick={onClick}>
+                2번
+              </SeatDivNumber>
+              <SeatDivNumber id="3" onClick={onClick}>
+                3번
+              </SeatDivNumber>
+              <SeatDivNumber id="4" onClick={onClick}>
+                4번
+              </SeatDivNumber>
+              <SeatDivNumber id="5" onClick={onClick}>
+                5번
+              </SeatDivNumber>
+              <SeatDivNumber id="6" onClick={onClick}>
+                6번
+              </SeatDivNumber>
+              <SeatDivNumber id="7" onClick={onClick}>
+                7번
+              </SeatDivNumber>
+              <SeatDivNumber id="8" onClick={onClick}>
+                8번
+              </SeatDivNumber>
+              <SeatDivNumber id="9" onClick={onClick}>
+                9번
+              </SeatDivNumber>
+              <SeatDivNumber id="10" onClick={onClick}>
+                10번
+              </SeatDivNumber>
+            </div>
+            <div className={style.contentsBox2}>
+              <SeatDivNumber id="11" onClick={onClick}>
+                11번
+              </SeatDivNumber>
+              <SeatDivNumber id="12" onClick={onClick}>
+                12번
+              </SeatDivNumber>
+              <SeatDivNumber id="13" onClick={onClick}>
+                13번
+              </SeatDivNumber>
+              <SeatDivNumber id="14" onClick={onClick}>
+                14번
+              </SeatDivNumber>
+              <SeatDivNumber id="15" onClick={onClick}>
+                15번
+              </SeatDivNumber>
+              <SeatDivNumber id="16" onClick={onClick}>
+                16번
+              </SeatDivNumber>
+              <SeatDivNumber id="17" onClick={onClick}>
+                17번
+              </SeatDivNumber>
+              <SeatDivNumber id="18" onClick={onClick}>
+                18번
+              </SeatDivNumber>
+              <SeatDivNumber id="19" onClick={onClick}>
+                19번
+              </SeatDivNumber>
+              <SeatDivNumber id="20" onClick={onClick}>
+                20번
+              </SeatDivNumber>
+            </div>
+            <div className={style.contentsBox3}>
+              <SeatDivNumber id="21" onClick={onClick}>
+                21번
+              </SeatDivNumber>
+              <SeatDivNumber id="22" onClick={onClick}>
+                22번
+              </SeatDivNumber>
+              <SeatDivNumber id="23" onClick={onClick}>
+                23번
+              </SeatDivNumber>
+              <SeatDivNumber id="24" onClick={onClick}>
+                24번
+              </SeatDivNumber>
+              <SeatDivNumber id="25" onClick={onClick}>
+                25번
+              </SeatDivNumber>
+              <SeatDivNumber id="26" onClick={onClick}>
+                26번
+              </SeatDivNumber>
+              <SeatDivNumber id="27" onClick={onClick}>
+                27번
+              </SeatDivNumber>
+              <SeatDivNumber id="28" onClick={onClick}>
+                28번
+              </SeatDivNumber>
+              <SeatDivNumber id="29" onClick={onClick}>
+                29번
+              </SeatDivNumber>
+              <SeatDivNumber id="30" onClick={onClick}>
+                30번
+              </SeatDivNumber>
+            </div>
           </div>
         </div>
+        <HR />
       </div>
-      <HR />
-    </div>
+    </>
   );
 }
 export default Seat;
