@@ -20,10 +20,6 @@ const MainContainer = styled.div`
   border-radius: 15px;
   overflow: hidden;
 `;
-const Test = styled.div`
-  display: flex;
-  width: 100px;
-`;
 const IMG = styled.img`
   width: 213px;
   height: 305px;

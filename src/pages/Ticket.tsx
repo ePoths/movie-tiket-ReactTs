@@ -64,8 +64,10 @@ function Ticket() {
   const LocalStorageMoiveInfo = JSON.parse(
     `${localStorage.getItem(`${Localkey}`)}`
   );
+
   const LocalStorageDate = JSON.parse(`${localStorage.getItem("date")}`);
   const LocalStorageSeatN = localStorage.getItem("seatN");
+
   useEffect(() => {
     if (LocalStorageMoiveInfo.moviePoseter.slice(0, 4) === "http") {
       setImgCheck(true);
