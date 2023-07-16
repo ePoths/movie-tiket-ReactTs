@@ -20,6 +20,7 @@ const MainContainer = styled.div`
   border-radius: 15px;
   overflow: hidden;
 `;
+
 const IMG = styled.img`
   width: 213px;
   height: 305px;
