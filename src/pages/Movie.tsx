@@ -25,6 +25,12 @@ const Container = styled.div`
   width: 100vh;
   margin: 0 auto;
 `;
+
+const Test = styled.div`
+  display: flex;
+  width: 100px;
+`;
+
 const MovieMainTitle = styled.h1`
   font-size: 40px;
   margin-top: 40px;
