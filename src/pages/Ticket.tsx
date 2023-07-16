@@ -61,15 +61,11 @@ const IMG = styled.img`
 function Ticket() {
   const Localkey = process.env.REACT_APP_LocalStorageKey;
   const [imgCheck, setImgCheck] = useState(false);
-
   const LocalStorageMoiveInfo = JSON.parse(
     `${localStorage.getItem(`${Localkey}`)}`
   );
-
   const LocalStorageDate = JSON.parse(`${localStorage.getItem("date")}`);
-
   const LocalStorageSeatN = localStorage.getItem("seatN");
-
   useEffect(() => {
     if (LocalStorageMoiveInfo.moviePoseter.slice(0, 4) === "http") {
       setImgCheck(true);
@@ -78,7 +74,6 @@ function Ticket() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <Container>
       <Mainh1>구매 완료</Mainh1>

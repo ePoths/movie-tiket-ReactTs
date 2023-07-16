@@ -118,15 +118,15 @@ function MovieInfo() {
           `
       )
     ).json();
-    setDocid(json.Data[0].Result[0].DOCID);
-    setmoviePoster(json.Data[0].Result[0].posters.split("|")[0]);
-    setGenre(json.Data[0].Result[0].genre);
-    setNation(json.Data[0].Result[0].nation);
-    setRating(json.Data[0].Result[0].rating);
-    setTitleOrg(json.Data[0].Result[0].titleOrg);
     setType(json.Data[0].Result[0].type);
     setUse(json.Data[0].Result[0].use);
+    setGenre(json.Data[0].Result[0].genre);
+    setDocid(json.Data[0].Result[0].DOCID);
+    setNation(json.Data[0].Result[0].nation);
+    setRating(json.Data[0].Result[0].rating);
     setRuntime(json.Data[0].Result[0].runtime);
+    setTitleOrg(json.Data[0].Result[0].titleOrg);
+    setmoviePoster(json.Data[0].Result[0].posters.split("|")[0]);
     setDirectorNm(json.Data[0].Result[0].directors.director[0].directorNm);
     setDirectorEnNm(json.Data[0].Result[0].directors.director[0].directorEnNm);
   };
